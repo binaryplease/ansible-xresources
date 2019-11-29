@@ -1,2 +1,31 @@
 ---
 # tasks file for ansible-xresources
+- name: Ensure .Xresources.d exists
+  file:
+    path: /home/{{user}}/.Xresources.d
+    state: directory
+
+- name: Template main .Xresources file
+  template:
+    src: Xresources.j2
+    dest: /home/{{user}}/.Xresources
+
+- name: Template colors
+  template:
+    src: colors.j2
+    dest: /home/{{user}}/.Xresources.d/colors
+
+- name: Template emacs
+  template:
+    src: emacs.j2
+    dest: /home/{{user}}/.Xresources.d/emacs
+
+- name: Template rofi
+  template:
+    src: rofi.j2
+    dest: /home/{{user}}/.Xresources.d/rofi
+
+- name: Template urxvt
+  template:
+    src: urxvt.j2
+    dest: /home/{{user}}/.Xresources.d/urxvt
