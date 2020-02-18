@@ -9,7 +9,6 @@
   template:
     src: Xresources.j2
     dest: "{{ansible_env.HOME}}/.Xresources"
-    register: xrdb_main
 
 - name: Template .Xresources.d/ files
   template:
@@ -20,8 +19,3 @@
     - emacs
     - rofi
     - urxvt
-  register: xrdb_other
-
-- name: Reload xresources
-  command: "xrdb ~/.Xresources"
-  when: xrdb_main.changed or xrdb_other.changed
